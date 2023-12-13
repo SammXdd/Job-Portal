@@ -10,6 +10,7 @@
 
 <link rel="stylesheet" href="/static/css/style.css">
 <link rel="stylesheet" href="/static/css/colors/green.css" id="colors">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
 
 
@@ -28,9 +29,23 @@
 	<div class="sixteen columns">
 	
 		<!-- Logo -->
-		<div id="logo">
+		<!-- <div id="logo">
 			<h1><a href="index.html"><img src="/static/images/logo.png" alt="Work Scout" /></a></h1>
+		</div> -->
+
+		<div id="logo">
+			<h1><a href="index.html"><img src="" alt="" /><i style="position: relative; top: 3px; right: 3px;" class='bx bxl-redbubble'></i>Binary Brains</a></h1>
 		</div>
+
+		<!-- <div id="logo">
+			<h1>
+				<i class='bx bxl-redbubble'></i>
+				<a href="index.html">
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAcNJREFUWEfdmOFNxDAMhd9tApMAm3CTAJMAkwCTHJuAHopR49qO06ZVwdLp7keafH1+sZM74WBxOhgP/g3QFYB7ADcA+Jufz6I2v/l5BfDem4FehR4BPHQsImB8LhVZoFsAz0WJ1MRqUBosA9SrSgT8BCBUqwX0BoDqjIwXAGdvwghopDJ6fVcpD4iqUJ0tgypRrSo8oMsKA2dfgka/zgCxvnBH7RGz1FkKWerwbXSRk4LIbwlvnLcxZippIE+dO6fqSsWWYmn6oqSfnpzCy0tUc2sgpopQOjwgjuMispgHxHHeRqnSpoG8uhMBcTF5LgIiOO2gg1bg/D+hgbzd1QISZSMgzw6Vj0YBfZUXHA4kE/d4aJrmVspofsujv8Ks9ZD2RQTkGTtM2RJTT73RArJ8FJraa6gjTE2FrPmr7q9T5tWKFpDUItaUWcMshkzNbbUOy9hWS9DGZzqyLWb6bMVgAe3ZXGees4CmrWDLjp8+fhBiD5VMX/6ZI6ykaotzdVV3tCdawtw6vdiz11uprkCw84qLIHdW8WmcUEih9OsyolL6xeuehzCJySoz+bPgoajQVWeKhLOSQcT0pG7Jga5LDAX0DQMh0JcV9t3YAAAAASUVORK5CYII="/>Binary Brains
+				</a>
+			</h1>
+		</div> -->
+		
 
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
@@ -179,75 +194,25 @@
 		<h3 class="margin-bottom-25">Recent Jobs</h3>
 		<ul class="job-list">
 
-			<li class="highlighted"><a href="job-page.html">
+			{% for job in recent_jobs %}
+			<li class="highlighted"><a href="{{ url_for('job_page', job_id=job['_id']) }}">
 				<img src="images/job-list-logo-01.png" alt="">
 				<div class="job-list-content">
-					<h4>Marketing Coordinator - SEO / SEM Experience <span class="full-time">Full-Time</span></h4>
+					<h4>{{ job.job_title }}  <span class="internship">{{ job.job_type }}</span></h4>
 					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> King</span>
+						<span><i class="fa fa-briefcase"></i> {{ job.company_name }}</span>
 						<span><i class="fa fa-map-marker"></i> Sydney</span>
-						<span><i class="fa fa-money"></i> $100 / hour</span>
+						<span><i class="fa fa-money"></i> {{ job.job_salary }}</span>
 					</div>
 				</div>
 				</a>
 				<div class="clearfix"></div>
 			</li>
+			{% endfor %}
 
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-02.png" alt="">
-				<div class="job-list-content">
-					<h4>Core PHP Developer for Site Maintenance <span class="part-time">Part-Time</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> Cubico</span>
-						<span><i class="fa fa-map-marker"></i> London</span>
-						<span><i class="fa fa-money"></i> $50 / hour</span>
-					</div>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
+			
 
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-03.png" alt="">
-				<div class="job-list-content">
-					<h4>Restaurant Team Member - Crew <span class="full-time">Full-Time</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> King</span>
-						<span><i class="fa fa-map-marker"></i> Sydney</span>
-						<span><i class="fa fa-money"></i> $15 / hour</span>
-					</div>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-04.png" alt="">
-				<div class="job-list-content">
-					<h4>Power Systems User Experience Designer  <span class="internship">Internship</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> Hexagon</span>
-						<span><i class="fa fa-map-marker"></i> London</span>
-						<span><i class="fa fa-money"></i> $75 / hour</span>
-					</div>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
-
-			<li><a href="job-page.html">
-				<img src="images/job-list-logo-05.png" alt="">
-				<div class="job-list-content">
-					<h4>iPhone / Android Music App Development <span class="temporary">Temporary</span></h4>
-					<div class="job-icons">
-						<span><i class="fa fa-briefcase"></i> Mates</span>
-						<span><i class="fa fa-map-marker"></i> New York</span>
-						<span><i class="fa fa-money"></i> $115 / hour</span>
-					</div>
-				</div>
-				</a>
-				<div class="clearfix"></div>
-			</li>
+			
 		</ul>
 
 		<a href="browse-jobs.html" class="button centered"><i class="fa fa-plus-circle"></i> Show More Jobs</a>
@@ -506,6 +471,8 @@
 <script src="/static/scripts/jquery.counterup.min.js"></script>
 <script src="/static/scripts/jquery.jpanelmenu.js"></script>
 <script src="/static/scripts/stacktable.js"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
 
 
 

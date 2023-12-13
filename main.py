@@ -17,7 +17,10 @@ users_collection = db['users']
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    recent_jobs = jobs_collection.find({}).sort('_id', -1).limit(5)
+    random_jobs = jobs_collection.aggregate([{ '$sample': { 'size': 5 } }])
+
+    return render_template('index.html', recent_jobs=recent_jobs, random_jobs=random_jobs)
 
 @app.route('/settings')
 def settings():
@@ -32,14 +35,18 @@ def account():
 def bro_jobs():
     jobs = jobs_collection.find({})
     # Convert _id to string in each job document
-    jobs = [{'_id': str(job['_id']), **job} for job in jobs]
+    # jobs = [{'_id': str(job['_id']), **job} for job in jobs]
     return render_template('browse-jobs.html', jobs=jobs)
 
+@app.route('/job-page')
+def jobpage():
+    jobs = jobs_collection.find({})
+    jobs = [{'_id': str(job['_id']), **job} for job in jobs]
+    return render_template('job-page.html', job=jobs)
 
 @app.route('/job/<job_id>')
 def job_page(job_id):
-    job = db['jobs2'].find_one({'_id': ObjectId(job_id)})  
-
+    job = jobs_collection.find_one({'_id': ObjectId(job_id)})  # Convert job_id to ObjectId
     return render_template('job-page.html', job=job)
 
 
@@ -65,13 +72,24 @@ def addjob():
         # extra fields
         twitter_name = request.form['twitter_username'] 
         description = request.form['description'] 
-        responsibilities = [
-            request.form[f'responsibility{i}'] for i in range(1, 5)
-        ]
+
+        respo1 = request.form['respo1']
+        respo2 = request.form['respo2']
+        respo3 = request.form['respo3']
+        respo4 = request.form['respo4']
+
+        req1 = request.form['req1']
+        req2 = request.form['req2']
+        req3 = request.form['req3']
+        req4 = request.form['req4']
+
+        # responsibilities = [
+        #     request.form[f'responsibility{i}'] for i in range(1, 5)
+        # ]
         
-        job_requirements = [
-            request.form[f'requirement{i}'] for i in range(1, 5)
-        ]
+        # job_requirements = [
+        #     request.form[f'requirement{i}'] for i in range(1, 5)
+        # ]
 
         # data
         job_data = {
@@ -96,8 +114,18 @@ def addjob():
             # Additional fields
             'twitter_name': twitter_name,
             'description': description,
-            'responsibilities': responsibilities,
-            'job_requirements': job_requirements
+            # 'responsibilities': responsibilities,
+            # 'job_requirements': job_requirements,
+
+            'respo1': respo1,
+            'respo2': respo2,
+            'respo3': respo3,
+            'respo4': respo4,
+
+            'req1': req1,
+            'req2': req2,
+            'req3': req3,
+            'req4': req4
         }
 
         job_data['added_by'] = session['username']
