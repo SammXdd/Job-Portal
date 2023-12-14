@@ -18,7 +18,7 @@ users_collection = db['users']
 @app.route('/')
 def index():
     recent_jobs = jobs_collection.find({}).sort('_id', -1).limit(5)
-    random_jobs = jobs_collection.aggregate([{ '$sample': { 'size': 5 } }])
+    random_jobs = jobs_collection.aggregate([{ '$sample': { 'size': 3 } }])
 
     return render_template('index.html', recent_jobs=recent_jobs, random_jobs=random_jobs)
 
@@ -30,6 +30,18 @@ def settings():
 def account():
     return render_template('account.html')
 
+@app.route('/my-resume')
+def resume():
+    return render_template('my-resume.html')
+
+@app.route('/browse-category')
+def bro_category():
+    return render_template('browse-categories.html')
+
+
+@app.route('/manage-application')
+def manage_app():
+    return render_template('manage-application.html')
 
 @app.route('/browse-jobs')
 def bro_jobs():
@@ -59,7 +71,9 @@ def addjob():
         job_title = request.form['job_title']
         job_time = request.form['job_time'] 
         job_location = request.form['job_location'] 
-        job_salary = request.form['job_salary'] 
+        location = request.form['location']
+        job_salary = request.form['job_salary']
+        logo = request.form['logo']
         # job_description = request.form['job_description']
         # benefits = request.form['benefits']
         # requirements = request.form['requirements']
@@ -98,7 +112,9 @@ def addjob():
             'job_type': job_type,
             'job_time': job_time,
             'job_location': job_location,
+            'location': location,
             'job_salary': job_salary,
+            'logo': logo,
             # 'job_description': job_description,
             # 'benefits': benefits,
             # 'requirements': requirements,
@@ -167,9 +183,7 @@ def delete_job(job_id):
         return "Job not found or you are not authorized to delete this job."
 
 
-@app.route('/browse-resume')
-def browse_res():
-    return render_template('browse-resumes.html')
+
 
 @app.route('/home')
 def home():

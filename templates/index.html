@@ -34,18 +34,9 @@
 		</div> -->
 
 		<div id="logo">
-			<h1><a href="index.html"><img src="" alt="" /><i style="position: relative; top: 3px; right: 3px;" class='bx bxl-redbubble'></i>Binary Brains</a></h1>
+			<h1><a href=""><img src="" alt="" /><i style="position: relative; top: 3px; right: 3px;" class='bx bxl-redbubble'></i>Binary Brains</a></h1>
 		</div>
 
-		<!-- <div id="logo">
-			<h1>
-				<i class='bx bxl-redbubble'></i>
-				<a href="index.html">
-					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAAAcNJREFUWEfdmOFNxDAMhd9tApMAm3CTAJMAkwCTHJuAHopR49qO06ZVwdLp7keafH1+sZM74WBxOhgP/g3QFYB7ADcA+Jufz6I2v/l5BfDem4FehR4BPHQsImB8LhVZoFsAz0WJ1MRqUBosA9SrSgT8BCBUqwX0BoDqjIwXAGdvwghopDJ6fVcpD4iqUJ0tgypRrSo8oMsKA2dfgka/zgCxvnBH7RGz1FkKWerwbXSRk4LIbwlvnLcxZippIE+dO6fqSsWWYmn6oqSfnpzCy0tUc2sgpopQOjwgjuMispgHxHHeRqnSpoG8uhMBcTF5LgIiOO2gg1bg/D+hgbzd1QISZSMgzw6Vj0YBfZUXHA4kE/d4aJrmVspofsujv8Ks9ZD2RQTkGTtM2RJTT73RArJ8FJraa6gjTE2FrPmr7q9T5tWKFpDUItaUWcMshkzNbbUOy9hWS9DGZzqyLWb6bMVgAe3ZXGees4CmrWDLjp8+fhBiD5VMX/6ZI6ykaotzdVV3tCdawtw6vdiz11uprkCw84qLIHdW8WmcUEih9OsyolL6xeuehzCJySoz+bPgoajQVWeKhLOSQcT0pG7Jga5LDAX0DQMh0JcV9t3YAAAAASUVORK5CYII="/>Binary Brains
-				</a>
-			</h1>
-		</div> -->
-		
 
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
@@ -60,38 +51,30 @@
 					</ul> -->
 				</li>
 
-				<li><a href="#">Pages</a>
-					<ul>
-						<li><a href="">Job Page</a></li>
-						<li><a href="resume-page.html">Resume Page</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</li>
 
 				<li><a href="#">For Freelancer</a>
 					<ul>
 						<li><a href="{{ url_for('bro_jobs') }}">Browse Jobs</a></li>
-						<li><a href="browse-categories.html">Browse Categories</a></li>
-						<li><a href="add-resume.html">Add Resume</a></li>
-						<li><a href="manage-resumes.html">Manage Resumes</a></li>
-						<li><a href="job-alerts.html">Job Alerts</a></li>
+						<li><a href="{{ url_for('bro_category') }}">Browse Categories</a></li>
+						<li><a href="{{ url_for('resume') }}">Add Resume</a></li>
 					</ul>
 				</li>
 
-				<li><a href="#">Find Freelancer</a>
+				<li><a href="#">Hire Freelancer</a>
 					<ul>
 						<li><a href="{{ url_for('addjob') }}">Add Job</a></li>
-						<li><a href="manage-jobs.html">Manage Jobs</a></li>
-						<li><a href="browse-resumes.html">Browse Resumes</a></li>
+						<li><a href="{{ url_for('manage_jobs') }}">Manage Jobs</a></li>
+						<li><a href="{{ url_for('manage_app') }}">Manage Application</a></li>
 					</ul>
 				</li>
 
 				{% if 'username' in session %}
 
-				<li><a href="blog.html">Settings</a>
+				<li><a href="">Settings</a>
 					<ul>
 						<li><a href="{{ url_for('index') }}">Edit Profile</a></li>
 						<li><a href="{{ url_for('logout') }}">Logout</a></li>
+						<li><a href="{{ url_for('resume') }}">My resume</a></li>
 					</ul>
 				</li>
 				{% endif %}
@@ -196,7 +179,7 @@
 
 			{% for job in recent_jobs %}
 			<li class="highlighted"><a href="{{ url_for('job_page', job_id=job['_id']) }}">
-				<img src="images/job-list-logo-01.png" alt="">
+				<img src="{{ job.logo }}" alt="">
 				<div class="job-list-content">
 					<h4>{{ job.job_title }}  <span class="internship">{{ job.job_type }}</span></h4>
 					<div class="job-icons">
@@ -235,41 +218,23 @@
 		<div id="job-spotlight" class="showbiz-container">
 			<div class="showbiz" data-left="#showbiz_left_1" data-right="#showbiz_right_1" data-play="#showbiz_play_1" >
 				<div class="overflowholder">
+					
+
 
 					<ul>
 
+						{% for job in random_jobs %}
 						<li>
 							<div class="job-spotlight">
-								<a href="#"><h4>Social Media: Advertising Coordinator <span class="part-time">Part-Time</span></h4></a>
-								<span><i class="fa fa-briefcase"></i> Mates</span>
-								<span><i class="fa fa-map-marker"></i> New York</span>
-								<span><i class="fa fa-money"></i> $20 / hour</span>
-								<p>As advertising & content coordinator, you will support our social media team in producing high quality social content for a range of media channels.</p>
-								<a href="job-page.html" class="button">Apply For This Job</a>
+								<a href="#"><h4>{{ job.job_title }} <span class="freelance">Part-Time</span></h4></a>
+								<span><i class="fa fa-briefcase"></i> {{ job.company_name }}</span>
+								<span><i class="fa fa-map-marker"></i> {{ job.location }}</span>
+								<span><i class="fa fa-money"></i> {{ job.job_salary }}</span>
+								<p>{{ job.description	 }}</p>
+								<a href="{{ url_for('job_page', job_id=job['_id']) }}" class="button">Apply For This Job</a>
 							</div>
 						</li>
-
-						<li>
-							<div class="job-spotlight">
-								<a href="#"><h4>Prestashop / WooCommerce Product Listing <span class="freelance">Freelance</span></h4></a>
-								<span><i class="fa fa-briefcase"></i> King</span>
-								<span><i class="fa fa-map-marker"></i> London</span>
-								<span><i class="fa fa-money"></i> $25 / hour</span>
-								<p>Etiam suscipit tellus ante, sit amet hendrerit magna varius in. Pellentesque lorem quis enim venenatis pellentesque.</p>
-								<a href="job-page.html" class="button">Apply For This Job</a>
-							</div>
-						</li>
-
-						<li>
-							<div class="job-spotlight">
-								<a href="#"><h4>Logo Design <span class="freelance">Freelance</span></h4></a>
-								<span><i class="fa fa-briefcase"></i> Hexagon</span>
-								<span><i class="fa fa-map-marker"></i> Sydney</span>
-								<span><i class="fa fa-money"></i> $10 / hour</span>
-								<p>Proin ligula neque, pretium et ipsum eget, mattis commodo dolor. Etiam tincidunt libero quis commodo.</p>
-								<a href="job-page.html" class="button">Apply For This Job</a>
-							</div>
-						</li>
+						{% endfor %}
 
 
 					</ul>
@@ -297,13 +262,13 @@
 				    </li>
 
 				    <li>
-				      <p>Nam eu eleifend nulla. Duis consectetur sit amet risus sit amet venenatis. Pellentesque pulvinar ante a tincidunt placerat. Donec dapibus efficitur arcu, a rhoncus lectus egestas elementum.
-				      <span>John Doe</span></p>
+				      <p>You cannot control what happens to you, but you can control your attitude toward what happens to you, and in that, you will be mastering change rather than allowing it to master you.
+				      <span>Brian Tracy</span></p>
 				    </li>
 				    
 				    <li>
-				      <p>Maecenas congue sed massa et porttitor. Duis placerat commodo ex, ut faucibus est facilisis ac. Donec eleifend arcu sed sem posuere aliquet. Etiam lorem metus, suscipit vel tortor vitae.
-				      <span>Tom Smith</span></p>
+				      <p>We must let go of the life we have planned, so as to accept the one that is waiting for us.
+				      <span>Joseph Campbell</span></p>
 				    </li>
 
 				  </ul>
@@ -316,7 +281,7 @@
 <!-- Infobox -->
 <div class="infobox">
 	<div class="container">
-		<div class="sixteen columns">Start Building Your Own Job Board Now <a href="my-account.html">Get Started</a></div>
+		<div class="sixteen columns">Start Building Your Own Job Board Now <a href="{{ url_for('account') }}">Get Started</a></div>
 	</div>
 </div>
 
@@ -388,13 +353,13 @@
 	<div class="container">
 
 		<div class="seven columns">
-			<h4>About</h4>
-			<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
-			<a href="#" class="button">Get Started</a>
+			<h4>About Us</h4>
+			<p>Binary Brains: Powering your career journey through innovative backend solutions, revolutionizing the job portal experience with expertise and dedication.</p>
+			<a href="{{ url_for('account') }}" class="button">Get Started</a>
 		</div>
 
 		<div class="three columns">
-			<h4>Company</h4>
+			<h4>BB Jobs</h4>
 			<ul class="footer-links">
 				<li><a href="#">About Us</a></li>
 				<li><a href="#">Careers</a></li>
@@ -437,12 +402,12 @@
 			<div class="sixteen columns">
 				<h4>Follow Us</h4>
 				<ul class="social-icons">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="instagram" href="#"><i class="icon-instagram"></i></a></li>
 					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
 					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
 					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
 				</ul>
-				<div class="copyrights">©  Copyright 2015 by <a href="#">Work Scout</a>. All Rights Reserved.</div>
+				<div class="copyrights">©  Copyright 2023 by <a href="#">Binary Brains</a>. All Rights Reserved.</div>
 			</div>
 		</div>
 	</div>

@@ -16,6 +16,8 @@
 ================================================== -->
 <link rel="stylesheet" href="/static/css/style.css">
 <link rel="stylesheet" href="/static/css/colors/green.css" id="colors">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -35,59 +37,60 @@
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="index.html"><img src="/static/images/logo.png" alt="Work Scout" /></a></h1>
+			<h1><a href="{{ url_for('index') }}"><img src="" alt="" /><i style="position: relative; top: 3px; right: 3px;" class='bx bxl-redbubble'></i>Binary Brains</a></h1>
 		</div>
 
 		<!-- Menu -->
 		<nav id="navigation" class="menu">
 			<ul id="responsive">
 
-				<li><a href="index.html">Home</a>
+				<li><a href="{{ url_for('index') }}">Home</a>
+				</li>
+
+
+				<li><a href="#">For Freelancer</a>
 					<ul>
-						<li><a href="index.html">Home #1</a></li>
-						<li><a href="index-2.html">Home #2</a></li>
-						<li><a href="index-3.html">Home #3</a></li>
-						<li><a href="index-4.html">Home #4</a></li>
+						<li><a href="{{ url_for('bro_jobs') }}">Browse Jobs</a></li>
+						<li><a href="">Browse Categories</a></li>
+						<li><a href="{{ url_for('resume') }}">Add Resume</a></li>
 					</ul>
 				</li>
 
-				<li><a href="#">Pages</a>
+				<li><a href="#" id="current">Hire Freelancer</a>
 					<ul>
-						<li><a href="job-page.html">Job Page</a></li>
-						<li><a href="job-page-alt.html">Job Page Alternative</a></li>
-						<li><a href="resume-page.html">Resume Page</a></li>
-						<li><a href="shortcodes.html">Shortcodes</a></li>
-						<li><a href="pricing-tables.html">Pricing Tables</a></li>
-						<li><a href="contact.html">Contact</a></li>
+						<li><a href="{{ url_for('addjob') }}">Add Job</a></li>
+						<li><a href="{{ url_for('manage_jobs') }}">Manage Jobs</a></li>
+						<li><a href="{{ url_for('manage_app') }}">Manage Applications</a></li>
 					</ul>
 				</li>
 
-				<li><a href="#">For Candidates</a>
+				{% if 'username' in session %}
+
+				<li><a href="blog.html">Settings</a>
 					<ul>
-						<li><a href="browse-jobs.html">Browse Jobs</a></li>
-						<li><a href="browse-categories.html">Browse Categories</a></li>
-						<li><a href="add-resume.html">Add Resume</a></li>
-						<li><a href="manage-resumes.html">Manage Resumes</a></li>
-						<li><a href="job-alerts.html">Job Alerts</a></li>
+						<li><a href="{{ url_for('index') }}">Edit Profile</a></li>
+						<li><a href="{{ url_for('resume') }}">My resume</a></li>
+						<li><a href="{{ url_for('logout') }}">Logout</a></li>
 					</ul>
 				</li>
-
-				<li><a href="#" id="current">For Employers</a>
-					<ul>
-						<li><a href="add-job.html">Add Job</a></li>
-						<li><a href="manage-jobs.html">Manage Jobs</a></li>
-						<li><a href="manage-applications.html">Manage Applications</a></li>
-						<li><a href="browse-resumes.html">Browse Resumes</a></li>
-					</ul>
-				</li>
-
-				<li><a href="blog.html">Blog</a></li>
+				{% endif %}
 			</ul>
 
 
-			<ul class="responsive float-right">
-				<li><a href="my-account.html#tab2"><i class="fa fa-user"></i> Sign Up</a></li>
-				<li><a href="my-account.html"><i class="fa fa-lock"></i> Log In</a></li>
+			<ul class="float-right">
+				<!-- Check if the user is logged in -->
+				{% if 'username' in session %}
+					<!-- Show profile dropdown -->
+					<li class="dropdown">
+						<a class="profile">
+							<img style="width: 50px;" src="/static/images/profile.png">
+						</a>
+					</li>
+				{% else %}
+					<!-- Show login/signup links -->
+					<li><a href="{{ url_for('account') }}"><i class="fa fa-user"></i> Create account</a></li>
+					<!-- <li><a href="{{ url_for('login') }}"><i class="fa fa-lock"></i> Log In</a></li> -->
+				{% endif %}
 			</ul>
 
 		</nav>
