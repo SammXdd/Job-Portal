@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8">
-<title>Work Scout</title>
+<title>Binary Brains</title>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -120,10 +120,13 @@
 			<div class="search-container">
 
 				<!-- Form -->
-				<h2>Find job</h2>
-				<input type="text" class="ico-01" placeholder="job title, keywords or company name" value=""/>
-				<input type="text" class="ico-02" placeholder="city, province or region" value=""/>
-				<button><i class="fa fa-search"></i></button>
+				<form action="{{ url_for('bro_jobs') }}" method="GET">
+					<h2>Find job</h2>
+					<input type="text" class="ico-01" placeholder="job title, keywords or company name" name="job_title" value=""/>
+					<input type="text" class="ico-02" placeholder="city, province or region" name="location" value=""/>
+					<button type="submit"><i class="fa fa-search"></i></button>
+				</form>
+				
 
 				<!-- Browse Jobs -->
 				<div class="browse-jobs">
@@ -163,7 +166,7 @@
 		<div class="clearfix"></div>
 		<div class="margin-top-30"></div>
 
-		<a href="browse-categories.html" class="button centered">Browse All Categories</a>
+		<a href="{{ url_for('bro_jobs') }}" class="button centered">Browse All Categories</a>
 		<div class="margin-bottom-50"></div>
 	</div>
 </div>
@@ -297,14 +300,14 @@
 
 		<!-- Post #1 -->
 		<div class="recent-post">
-			<div class="recent-post-img"><a href="blog-single-post.html"><img src="images/recent-post-01.jpg" alt=""></a><div class="hover-icon"></div></div>
-			<a href="blog-single-post.html"><h4>Hey Job Seeker, It’s Time To Get Up And Get Hired</h4></a>
+			<div class="recent-post-img"><a href=""><img src="images/recent-post-01.jpg" alt=""></a><div class="hover-icon"></div></div>
+			<a href=""><h4>Hey Job Seeker, It’s Time To Get Up And Get Hired</h4></a>
 			<div class="meta-tags">
-				<span>October 10, 2015</span>
-				<span><a href="#">0 Comments</a></span>
+				<span>October 10, 2024</span>
+				<span><a href="#">3 Comments</a></span>
 			</div>
 			<p>The world of job seeking can be all consuming. From secretly stalking the open reqs page of your dream company to sending endless applications.</p>
-			<a href="blog-single-post.html" class="button">Read More</a>
+			<a href="" class="button">Read More</a>
 		</div>
 
 	</div>
@@ -314,14 +317,14 @@
 
 		<!-- Post #2 -->
 		<div class="recent-post">
-			<div class="recent-post-img"><a href="blog-single-post.html"><img src="images/recent-post-02.jpg" alt=""></a><div class="hover-icon"></div></div>
-			<a href="blog-single-post.html"><h4>How to "Woo" a Recruiter and Land Your Dream Job</h4></a>
+			<div class="recent-post-img"><a href=""><img src="images/recent-post-02.jpg" alt=""></a><div class="hover-icon"></div></div>
+			<a href=""><h4>How to "Woo" a Recruiter and Land Your Dream Job</h4></a>
 			<div class="meta-tags">
-				<span>September 12, 2015</span>
-				<span><a href="#">0 Comments</a></span>
+				<span>September 12, 2021</span>
+				<span><a href="#">5 Comments</a></span>
 			</div>
 			<p>Struggling to find your significant other the perfect Valentine’s Day gift? If I may make a suggestion: woo a recruiter. </p>
-			<a href="blog-single-post.html" class="button">Read More</a>
+			<a href="" class="button">Read More</a>
 		</div>
 
 	</div>
@@ -330,14 +333,14 @@
 
 		<!-- Post #3 -->
 		<div class="recent-post">
-			<div class="recent-post-img"><a href="blog-single-post.html"><img src="images/recent-post-03.jpg" alt=""></a><div class="hover-icon"></div></div>
-			<a href="blog-single-post.html"><h4>11 Tips to Help You Get New Clients Through Cold Calling</h4></a>
+			<div class="recent-post-img"><a href=""><img src="images/recent-post-03.jpg" alt=""></a><div class="hover-icon"></div></div>
+			<a href=""><h4>11 Tips to Help You Get New Clients Through Cold Calling</h4></a>
 			<div class="meta-tags">
-				<span>August 27, 2015</span>
-				<span><a href="#">0 Comments</a></span>
+				<span>August 27, 2023</span>
+				<span><a href="#">9 Comments</a></span>
 			</div>
 			<p>If your dream employer appears on this list, you’re certainly in good company. But it also means you’re up for some intense competition.</p>
-			<a href="blog-single-post.html" class="button">Read More</a>
+			<a href="" class="button">Read More</a>
 		</div>
 	</div>
 
@@ -362,35 +365,28 @@
 			<h4>BB Jobs</h4>
 			<ul class="footer-links">
 				<li><a href="#">About Us</a></li>
-				<li><a href="#">Careers</a></li>
-				<li><a href="#">Our Blog</a></li>
-				<li><a href="#">Terms of Service</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-				<li><a href="#">Hiring Hub</a></li>
+				{% if 'username' in session %}
+				<li><a href="#">Edit Profile</a></li>
+				<li><a href="#">Logout</a></li>
+				{% endif %}		
 			</ul>
 		</div>
 		
 		<div class="three columns">
-			<h4>Press</h4>
+			<h4>For Freelancer</h4>
 			<ul class="footer-links">
-				<li><a href="#">In the News</a></li>
-				<li><a href="#">Press Releases</a></li>
-				<li><a href="#">Awards</a></li>
-				<li><a href="#">Testimonials</a></li>
-				<li><a href="#">Timeline</a></li>
+				<li><a href="#">Browse Jobs</a></li>
+				<li><a href="#">Browse Categories</a></li>
+				<li><a href="#">Add Resume</a></li>
 			</ul>
 		</div>		
 
 		<div class="three columns">
-			<h4>Browse</h4>
+			<h4>Hire Freelancer</h4>
 			<ul class="footer-links">
-				<li><a href="#">Freelancers by Category</a></li>
-				<li><a href="#">Freelancers in USA</a></li>
-				<li><a href="#">Freelancers in UK</a></li>
-				<li><a href="#">Freelancers in Canada</a></li>
-				<li><a href="#">Freelancers in Australia</a></li>
-				<li><a href="#">Find Jobs</a></li>
-
+				<li><a href="#">Add Job</a></li>
+				<li><a href="#">Manage Job</a></li>
+				<li><a href="#">Manage Application</a></li>
 			</ul>
 		</div>
 
@@ -437,6 +433,18 @@
 <script src="/static/scripts/jquery.jpanelmenu.js"></script>
 <script src="/static/scripts/stacktable.js"></script>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const jobTitle = document.querySelector('.ico-01').value;
+        const location = document.querySelector('.ico-02').value;
+        
+        // Redirect to browse-jobs with query parameters
+        window.location.href = `/browse-jobs?job_title=${jobTitle}&location=${location}`;
+    });
+</script>
 
 
 

@@ -6,7 +6,7 @@
 <!-- Basic Page Needs
 ================================================== -->
 <meta charset="utf-8">
-<title>Work Scout</title>
+<title>BB Jobs</title>
 
 <!-- Mobile Specific Metas
 ================================================== -->
@@ -192,44 +192,37 @@
 	<div class="container">
 
 		<div class="seven columns">
-			<h4>About</h4>
-			<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
-			<a href="#" class="button">Get Started</a>
+			<h4>About Us</h4>
+			<p>Binary Brains: Powering your career journey through innovative backend solutions, revolutionizing the job portal experience with expertise and dedication.</p>
+			<a href="{{ url_for('account') }}" class="button">Get Started</a>
 		</div>
 
 		<div class="three columns">
-			<h4>Company</h4>
+			<h4>BB Jobs</h4>
 			<ul class="footer-links">
 				<li><a href="#">About Us</a></li>
-				<li><a href="#">Careers</a></li>
-				<li><a href="#">Our Blog</a></li>
-				<li><a href="#">Terms of Service</a></li>
-				<li><a href="#">Privacy Policy</a></li>
-				<li><a href="#">Hiring Hub</a></li>
+				{% if 'username' in session %}
+				<li><a href="#">Edit Profile</a></li>
+				<li><a href="#">Logout</a></li>
+				{% endif %}		
 			</ul>
 		</div>
 		
 		<div class="three columns">
-			<h4>Press</h4>
+			<h4>For Freelancer</h4>
 			<ul class="footer-links">
-				<li><a href="#">In the News</a></li>
-				<li><a href="#">Press Releases</a></li>
-				<li><a href="#">Awards</a></li>
-				<li><a href="#">Testimonials</a></li>
-				<li><a href="#">Timeline</a></li>
+				<li><a href="#">Browse Jobs</a></li>
+				<li><a href="#">Browse Categories</a></li>
+				<li><a href="#">Add Resume</a></li>
 			</ul>
 		</div>		
 
 		<div class="three columns">
-			<h4>Browse</h4>
+			<h4>Hire Freelancer</h4>
 			<ul class="footer-links">
-				<li><a href="#">Freelancers by Category</a></li>
-				<li><a href="#">Freelancers in USA</a></li>
-				<li><a href="#">Freelancers in UK</a></li>
-				<li><a href="#">Freelancers in Canada</a></li>
-				<li><a href="#">Freelancers in Australia</a></li>
-				<li><a href="#">Find Jobs</a></li>
-
+				<li><a href="#">Add Job</a></li>
+				<li><a href="#">Manage Job</a></li>
+				<li><a href="#">Manage Application</a></li>
 			</ul>
 		</div>
 
@@ -241,12 +234,12 @@
 			<div class="sixteen columns">
 				<h4>Follow Us</h4>
 				<ul class="social-icons">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="instagram" href="#"><i class="icon-instagram"></i></a></li>
 					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
 					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
 					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
 				</ul>
-				<div class="copyrights">©  Copyright 2015 by <a href="#">Work Scout</a>. All Rights Reserved.</div>
+				<div class="copyrights">©  Copyright 2023 by <a href="#">Binary Brains</a>. All Rights Reserved.</div>
 			</div>
 		</div>
 	</div>
