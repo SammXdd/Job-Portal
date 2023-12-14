@@ -39,3 +39,17 @@ BB Jobs is a Flask-based web application designed to streamline job listings and
 
 - **Responsive Design:** 
   - Ensured a responsive layout for seamless accessibility across devices.
+
+
+## Installation
+- **Step1 - Install Python** 
+- **Step2 - Run this commands** 
+```
+pip install flask
+```
+
+```
+python main.py 
+```
+**Or use code runner to run main.py** 
+

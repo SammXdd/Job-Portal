@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+import datetime
 from pymongo import MongoClient
 from bson import ObjectId
 
@@ -12,6 +13,7 @@ users_collection = db['users']
 db = client['job_portal']
 jobs_collection = db['jobs']
 users_collection = db['users'] 
+
 # jobs2_collection = db['jobs2']
 
 
@@ -33,27 +35,6 @@ def index():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
-
-@app.route('/chat')
-def chat():
-    if 'username' in session:
-        return render_template('chat.html')
-    else:
-        return redirect(url_for('account'))
-    
-@app.route('/send_message', methods=['POST'])
-def send_message():
-    if 'username' in session:
-        # Get the message from the form data
-        message = request.form.get('message')
-        username = session['username']
-
-        print(f"Message from {username}: {message}")
-
-        return 'Message sent successfully'  
-    else:
-        return 'User not authenticated'  
-
     
 @app.route('/account')
 def account():

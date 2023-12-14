@@ -15,7 +15,9 @@
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="static/css/style.css">
-<link rel="stylesheet" href="static/static/css/colors/green.css" id="colors">
+<link rel="stylesheet" href="static/css/colors/green.css" id="colors">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -35,7 +37,7 @@
 
 		<!-- Logo -->
 		<div id="logo">
-			<h1><a href="{{ url_for('index') }}"><img src="/static/images/logo.png" alt="Work Scout" /></a></h1>
+			<h1><a href=""><img src="" alt="" /><i style="position: relative; top: 3px; right: 3px;" class='bx bxl-redbubble'></i>Binary Brains</a></h1>
 		</div>
 
 		<!-- Menu -->
@@ -47,17 +49,17 @@
 
 				<li><a href="#">For Freelancer</a>
 					<ul>
-						<li><a href="browse-jobs.html">Browse Jobs</a></li>
-						<li><a href="browse-categories.html">Browse Categories</a></li>
-						<li><a href="add-resume.html">Add Resume</a></li>
+						<li><a href="{{ url_for('bro_jobs') }}">Browse Jobs</a></li>
+						<li><a href="{{ url_for('bro_category') }}">Browse Categories</a></li>
+						<li><a href="{{ url_for('resume') }}">Add Resume</a></li>
 					</ul>
 				</li>
 
 				<li><a href="#">Hire Freelancer</a>
 					<ul>
-						<li><a href="add-job.html">Add Job</a></li>
-						<li><a href="manage-jobs.html">Manage Jobs</a></li>
-						<li><a href="manage-applications.html">Manage Applications</a></li>
+						<li><a href="{{ url_for('addjob') }}">Add Job</a></li>
+						<li><a href="{{ url_for('manage_jobs') }}">Manage Jobs</a></li>
+						<li><a href="{{ url_for('manage_app') }}">Manage Application</a></li>
 					</ul>
 				</li>
 
