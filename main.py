@@ -15,6 +15,14 @@ users_collection = db['users']
 # jobs2_collection = db['jobs2']
 
 
+def fetch_logo_url(job_id):
+    # Retrieve the logo URL associated with the job from MongoDB
+    job = jobs_collection.find_one({'_id': job_id})
+    if job:
+        return job.get('logo', '')  # Return the logo URL if it exists in the job data
+    return ''
+
+
 @app.route('/')
 def index():
     recent_jobs = jobs_collection.find({}).sort('_id', -1).limit(5)
@@ -26,6 +34,27 @@ def index():
 def settings():
     return render_template('settings.html')
 
+@app.route('/chat')
+def chat():
+    if 'username' in session:
+        return render_template('chat.html')
+    else:
+        return redirect(url_for('account'))
+    
+@app.route('/send_message', methods=['POST'])
+def send_message():
+    if 'username' in session:
+        # Get the message from the form data
+        message = request.form.get('message')
+        username = session['username']
+
+        print(f"Message from {username}: {message}")
+
+        return 'Message sent successfully'  
+    else:
+        return 'User not authenticated'  
+
+    
 @app.route('/account')
 def account():
     return render_template('account.html')
@@ -73,7 +102,6 @@ def addjob():
         job_location = request.form['job_location'] 
         location = request.form['location']
         job_salary = request.form['job_salary']
-        logo = request.form['logo']
         # job_description = request.form['job_description']
         # benefits = request.form['benefits']
         # requirements = request.form['requirements']
@@ -97,13 +125,8 @@ def addjob():
         req3 = request.form['req3']
         req4 = request.form['req4']
 
-        # responsibilities = [
-        #     request.form[f'responsibility{i}'] for i in range(1, 5)
-        # ]
-        
-        # job_requirements = [
-        #     request.form[f'requirement{i}'] for i in range(1, 5)
-        # ]
+        job_id = request.form.get('job_id')
+        logo_url = fetch_logo_url(job_id)
 
         # data
         job_data = {
@@ -114,7 +137,6 @@ def addjob():
             'job_location': job_location,
             'location': location,
             'job_salary': job_salary,
-            'logo': logo,
             # 'job_description': job_description,
             # 'benefits': benefits,
             # 'requirements': requirements,
@@ -143,6 +165,10 @@ def addjob():
             'req3': req3,
             'req4': req4
         }
+
+        if logo_url:
+            job_data['logo'] = logo_url  # Assign the fetched logo URL if available
+
 
         job_data['added_by'] = session['username']
         jobs_collection.insert_one(job_data)

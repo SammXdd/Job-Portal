@@ -14,6 +14,8 @@
 
 
 
+
+
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
@@ -22,6 +24,10 @@
 
 <body>
 <div id="wrapper">
+
+	<div class="popup-button">
+		<a href="/chat"><i class='bx bxs-chat'></i></a>
+	  </div>
 
 
 <header>
@@ -122,8 +128,8 @@
 				<!-- Form -->
 				<form action="{{ url_for('bro_jobs') }}" method="GET">
 					<h2>Find job</h2>
-					<input type="text" class="ico-01" placeholder="job title, keywords or company name" name="job_title" value=""/>
-					<input type="text" class="ico-02" placeholder="city, province or region" name="location" value=""/>
+					<input type="text" class="ico-01" placeholder="job title, company name" name="job_title" value=""/>
+					<input type="text" class="ico-02" placeholder="city, region" name="location" value=""/>
 					<button type="submit"><i class="fa fa-search"></i></button>
 				</form>
 				

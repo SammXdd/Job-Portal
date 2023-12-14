@@ -167,7 +167,7 @@
 
 						<div class="form">
 							<h5>Location</h5>
-							<input class="search-field" type="text" placeholder="e.g. Sweden" name="job_location" value="" />
+							<input class="search-field" type="text" placeholder="e.g. Sweden" name="location" value="" />
 						</div>
 
 						<div class="form">
@@ -273,24 +273,53 @@
 							<h3>• Responsibilities </h3>
 						</div>
 						<!-- Responsibilities -->
-						{% for i in range(1, 5) %}
+						
+
 						<div class="form">
-							<h5>{{ loop.index }} Responsibility</h5>
-							<input class="search-field" type="text" name="responsibility{{ loop.index }}" />
+							<h5>1st Responsibilities</h5>
+							<input class="search-field" type="text" name="respo1" value="" />
 						</div>
-						{% endfor %}
+						
+						<div class="form">
+							<h5>2nd Responsibilities</h5>
+							<input class="search-field" type="text" name="respo2" value="" />
+						</div>
+
+						<div class="form">
+							<h5>3rd Responsibilities</h5>
+							<input class="search-field" type="text" name="respo3" value="" />
+						</div>
+
+						<div class="form">
+							<h5>4th Responsibilities</h5>
+							<input class="search-field" type="text" name="respo4" value="" />
+						</div>
+
 
 						<div class="divider">
 							<h3>• Requirements</h3>
 						</div>
 
 						<!-- Requirements -->
-						{% for i in range(1, 5) %}
 						<div class="form">
-							<h5>{{ loop.index }} Requirement</h5>
-							<input class="search-field" type="text" name="requirement{{ loop.index }}" />
+							<h5>1st Requirements</h5>
+							<input class="search-field" type="text" name="req1" value="" />
 						</div>
-						{% endfor %}
+						
+						<div class="form">
+							<h5>2nd Requirements</h5>
+							<input class="search-field" type="text" name="req2" value="" />
+						</div>
+
+						<div class="form">
+							<h5>3rd Requirements</h5>
+							<input class="search-field" type="text" name="req3" value="" />
+						</div>
+
+						<div class="form">
+							<h5>4th Requirements</h5>
+							<input class="search-field" type="text" name="req4" value="" />
+						</div>
 
 
 
